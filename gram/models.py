@@ -22,6 +22,11 @@ class User(models.Model):
     def update_user(self):
         User.objects.filter(self).update(self)
 
+    @classmethod
+    def details(cls,id):
+        user = cls.objects.filter(id__icontains = id)
+        return user
+
     class Meta:
         ordering = ['first_name']
 
@@ -72,8 +77,8 @@ class Like(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to = 'image/',default='SOME STRING')
     user = models.ForeignKey(User)
-    comment = models.ForeignKey(Comment)
-    like = models.ForeignKey(Like)
+    comments = models.ForeignKey(Comment)
+    likes = models.ForeignKey(Like)
     pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def save_image(self):
