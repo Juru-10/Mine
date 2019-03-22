@@ -1,0 +1,44 @@
+{%extends 'all-image/base.html'%}
+
+ {% block content %}
+
+ <div class="container">
+   <!-- <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+
+   <div class="row">
+     {%for image in image%}
+     <div class="" style=''>
+
+       <h1 class="">{{image.name}}</h1>
+       <img src="{{image.image.url}}" style='float:left;height:80%;width:50%;margin-right:60px;' alt="{{image.name}}">
+       <span>
+         <p>Link to Image : <input id="link" rows="2" cols="25"type="text" name="" value="https://gallery1010.herokuapp.com{{image.image.url}}"></p>
+         <!-- <in rows="2" cols="25" readonly id="link">{{image.image.url}}</textarea> -->
+         <button class="btn-info"onclick="ftn()" style="border-radius:5px;">Copy Link</button>
+         <script type="text/javascript">
+           function ftn(){
+             var copyLink=document.getElementById("link");
+             copyLink.select();
+             document.execCommand("copy")
+           }
+         </script>
+       </span>
+     </div>
+
+     <div class="" style='margin-top:100px;'>
+       <div class="">
+         <p>Place : {{image.location}}</p>
+         <p>Category : {{image.category}}</p>
+         <p>Description : {{image.description}}</p>
+       </div>
+       <div class=""style='margin-top:100px;'>
+         <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
+         <p>by <strong>{{image.editor.first_name}}</strong></p>
+       </div>
+     </div>
+     {%endfor%}
+   </div>
+ </div>
+ <!-- </div> -->
+
+ {% endblock %}

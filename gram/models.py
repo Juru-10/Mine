@@ -5,8 +5,10 @@ class User(models.Model):
     username = models.CharField(max_length = 30)
     email = models.EmailField()
     password = models.CharField(min_legth = 8)
-    prof_pic_path = models.CharField(max_length = 30)
-    phone_number = models.CharField(max_length = 10,blank =True)
+    prof_pic = models.ImageField(upload_to = 'image/',default='SOME STRING')
+    posts = models.ForeignKey(Image)
+    following = models.ForeignKey(Follower)
+    followers = models.IntegerField()
 
     def __str__(self):
         return self.first_name
@@ -22,6 +24,20 @@ class User(models.Model):
 
     class Meta:
         ordering = ['first_name']
+
+class Follower(models.Model):
+    follow = models.BooleanField()
+    def __str__(self):
+        return self.follow
+
+    def save_follow(self):
+        self.save()
+
+    def display_follows():
+        Follower.objects.all()
+
+    def update_follow(self):
+        Follower.objects.filter(self).update(self)
 
 class Comment(models.Model):
     comment = models.CharField(max_length =200)
@@ -39,7 +55,7 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    like = models.BooleanField(default = True)
+    like = models.BooleanField()
     def __str__(self):
         return self.like
 
