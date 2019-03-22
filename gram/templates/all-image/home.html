@@ -4,70 +4,23 @@
 {{block.super}}
 
 <div class="container">
-  <!-- Looping through images   -->
+  <h4>Suggestions For You</h4>
   <div class="row">
-    <div class="imgs">
-      {% for image in image %}
+    <div class="users">
+      {% for user in users %}
         <div id="img" style='float:left;margin:3%;'>
-          <h3> {{ image.name }} </h3>
-          <a href="{% url 'image_details' image.id %}" data-toggle="modal" data-target="#pModal"><img style="height:200px;width:300px;"src="{{image.image.url}}" class="img-responsive" alt="Image"></a>
-
-          <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
-          <p>by <strong>{{image.editor.first_name}}</strong></p>
+          <img src="{{ user.prof_pic.url }}" alt="">
+          <h5>user.username</h5>
+          <h5>user.full_name</h5>
+          <a href="{% url 'image_details' image.id %}" data-toggle="modal" data-target="#pModal"><button type="button" name="button">Follow</button></a>
+          {% if follow %}
+            <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
+            <p>by <strong>{{image.editor.first_name}}</strong></p>
+          {% endif %}
         </div>
       {% endfor %}
     </div>
   </div>
-</div>
-<div class="">
-  {% for image in image %}
-    <div id="pModal" class="modal fade" role="dialog" syle="width:65%;height:80%;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="model-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <div class="modal-title"><h3>Image Details</h3></div>
-          </div>
-
-          <div class="modal-body">
-            <div class="">
-              <div class="" style=''>
-                <h1 class="">{{image.name}}</h1>
-                <img src="{{image.image.url}}" style='float:left;height:80%;width:50%;margin-right:60px;' alt="{{image.name}}">
-                <span>
-                  <input id="link" rows="2" cols="25"type="text" name="" value="{{image.image.url}}">
-                  <!-- <in rows="2" cols="25" readonly id="link">{{image.image.url}}</textarea> -->
-                  <button class="btn-info"onclick="ftn()" style="border-radius:5px;">Copy Link</button>
-                  <script type="text/javascript">
-                    function ftn(){
-                      var copyLink=document.getElementById("link");
-                      copyLink.select();
-                      document.execCommand("copy")
-                    }
-                  </script>
-                </span>
-              </div>
-              <div class="" style='margin-top:100px;'>
-                <div class="">
-                  <p>Place : {{image.location}}</p>
-                  <p>Category : {{image.category}}</p>
-                  <p>Description : {{image.description}}</p>
-                </div>
-                <div class=""style='margin-top:100px;'>
-                  <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
-                  <p>by <strong>{{image.editor.first_name}}</strong></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  {% endfor %}
 </div>
 <footer style="color: white;text-align: center;background-color:rgb(40,0,20);">
   <div class="">
