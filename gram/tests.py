@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .models import User
+from .models import User,Image,Comment,Like
 import datetime as dt
 
 class UserTestClass(TestCase):
