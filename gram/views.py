@@ -8,4 +8,9 @@ def all_images(request):
     image=Image.objects.all()
     date=dt.date.today()
 
-    return render(request,"all-image/today-image.html", {"date": date,"image":image})
+    return render(request,"all-image/home.html", {"date": date,"image":image})
+
+def prof(request,id):
+    user = User.details(id)
+    print(image)
+    return render(request,"all-image/prof.html", {"user":user,"id":id})
