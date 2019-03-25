@@ -25,21 +25,27 @@ def new_img(request):
         form = NewImageForm(request.POST,request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            image.user = current_user
+            image.profile = current_user
             image.save()
-        return redirect('all_images')
+        return redirect('prof')
     else:
         form = NewImageForm()
-    return render(request,'new_img.html',{"form": form})
+    return render(request,'registration/new_img.html',{"form": form})
 
 @login_required(login_url='/accounts/login')
 def edit_prof(request):
+    current_user = request.user
     if request.method == 'POST':
         form = NewProfForm(request.POST,request.FILES)
         if form.is_valid():
             profile = form.save()
-            profile.update().save()
+            profile.user = current_user
+            profile.edit_profile(id=profile.id)
         return redirect('prof')
     else:
         form = NewProfForm()
     return render(request,'registration/edit_prof.html',{"form": form})
+
+@login_required(login_url='/accounts/login/')
+def admin(request):
+    return render(request)

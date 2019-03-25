@@ -10,11 +10,11 @@
 
      </div>
      <div class="" style='margin-top:100px;'>
-       <!-- <div class="">
-         <p>Posts : {{user.posts}}</p>
+       <div class="">
+         <p>Posts : {{profile.posts}}</p>
          <p>followers : {{user.followers}}</p>
          <p>following : {{image.following}}</p>
-       </div> -->
+       </div>
        <div class="row">
          {% autoescape on %}
          {{profile.bio| safe}}
@@ -33,6 +33,11 @@
    <a href="{%url 'edit_prof'%}">
      <input type="submit" class="btn btn-primary btn-sm" value="Edit Profile">
    </a>
+   <div class=""style='margin-top:100px;'>
+     <a href="{%url 'new_img'%}">
+      <input type="submit" class="btn btn-primary btn-sm" value="Add Image">
+     </a>
+   </div>
  </div>
  <!-- </div> -->
 

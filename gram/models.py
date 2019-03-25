@@ -7,11 +7,25 @@ class Profile(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     prof_pic = models.ImageField(upload_to = 'gram/',default='SOME STRING')
     bio = HTMLField()
+    following = models.BooleanField(default=False)
+    followers = models.BooleanField(default=False)
     def __str__(self):
-        return self.user
+        return self.profile
 
-    def save_profile(self):
-        self.save()
+    @classmethod
+    def save_profile(cls):
+        profile = cls.objects.create().save()
+        return profile
+
+    @classmethod
+    def delete_profile(cls):
+        profile = cls.objects.delete()
+        return profile
+
+    @classmethod
+    def edit_profile(cls,id):
+        profile = cls.objects.filter(id).update()
+        return profile
 
 class Image(models.Model):
     image = models.ImageField(upload_to = 'gram/',default='SOME STRING')
@@ -36,7 +50,7 @@ class Image(models.Model):
 
     @classmethod
     def update_caption(cls,id):
-        caption = cls.objects.caption.update()
+        caption = cls.objects.filter(id).update()
         return caption
 
 class Follow(models.Model):
