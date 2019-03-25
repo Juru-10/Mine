@@ -7,16 +7,16 @@ from .forms import NewProfForm, NewImageForm
 
 @login_required(login_url='/accounts/login')
 def all_images(request):
-    image=Image.objects.all()
-    date=dt.date.today()
-
+    image = Image.objects.all()
+    date = dt.date.today()
     return render(request,"all-image/home.html", {"date": date,"image":image})
 
 @login_required(login_url='/accounts/login')
-def prof(request,id):
-    user = User.details(id)
-    print(image)
-    return render(request,"all-image/prof.html", {"user":user,"id":id})
+def prof(request):
+    user = request.user
+    profile = Profile.objects.filter(id=user.id)
+    print(profile)
+    return render(request,"all-image/prof.html", {"profile":profile,"id":id})
 
 @login_required(login_url='/accounts/login')
 def new_img(request):
@@ -32,13 +32,14 @@ def new_img(request):
         form = NewImageForm()
     return render(request,'new_img.html',{"form": form})
 
-def signup(request):
+@login_required(login_url='/accounts/login')
+def edit_prof(request):
     if request.method == 'POST':
         form = NewProfForm(request.POST,request.FILES)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.save()
-        return redirect('/accounts/login/?next=/')
+            profile = form.save()
+            profile.update().save()
+        return redirect('prof')
     else:
         form = NewProfForm()
-    return render(request,'registration/registration_form.html',{"form": form})
+    return render(request,'registration/edit_prof.html',{"form": form})

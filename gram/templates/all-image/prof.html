@@ -6,7 +6,7 @@
 
    <div class="row">
      <div class="" style=''>
-       <img src="{{user.prof_pic.url}}" style='float:left;height:80%;width:50%;margin-right:60px;' alt="Profile Pic">
+       <img src="{{profile.prof_pic.url}}" style='float:left;height:80%;width:30%;margin-right:60px;' alt="Profile Pic">
 
      </div>
      <div class="" style='margin-top:100px;'>
@@ -30,6 +30,9 @@
      <p>{{image.likes}}</p>
      {%endfor%}
    </div>
+   <a href="{%url 'edit_prof'%}">
+     <input type="submit" class="btn btn-primary btn-sm" value="Edit Profile">
+   </a>
  </div>
  <!-- </div> -->
 
