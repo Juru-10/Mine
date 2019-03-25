@@ -12,7 +12,6 @@
           <img src="{{ user.prof_pic.url }}" alt="">
           <h5>user.username</h5>
           <h5>user.full_name</h5>
-          <a href="{% url 'image_details' image.id %}" data-toggle="modal" data-target="#pModal"><button type="button" name="button">Follow</button></a>
           {% if follow %}
             <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
             <p>by <strong>{{image.editor.first_name}}</strong></p>

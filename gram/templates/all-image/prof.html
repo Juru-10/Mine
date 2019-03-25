@@ -10,13 +10,19 @@
 
      </div>
      <div class="" style='margin-top:100px;'>
-       <div class="">
+       <!-- <div class="">
          <p>Posts : {{user.posts}}</p>
          <p>followers : {{user.followers}}</p>
          <p>following : {{image.following}}</p>
+       </div> -->
+       <div class="row">
+         {% autoescape on %}
+         {{profile.bio| safe}}
+        {% endautoescape %}
+
        </div>
      </div>
-     {% for image in images %}
+     {% for image in image %}
      <img src="{{user.prof_pic.url}}" style='float:left;height:80%;width:50%;margin-right:60px;' alt="Profile Pic">
      <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
      <p>by <strong>{{image.user.username}}</strong></p>

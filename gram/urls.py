@@ -4,8 +4,10 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns=[
-url(r'^$',views.home,name='home'),
-url(r'^/profile/$',views.prof,name='prof')
+url(r'^$',views.all_images,name='home'),
+url(r'^profile/$',views.prof,name='prof'),
+url(r'^new_image$',views.new_img,name='new_img'),
+url(r'^SignUp$',views.signup,name='signup')
 ]
 
 if settings.DEBUG:
