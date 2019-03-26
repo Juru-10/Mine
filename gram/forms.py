@@ -28,7 +28,7 @@ from .models import Profile,Image
 class NewProfForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user','following','followers']
+        exclude = ['user','follow']
         # widgets = {
         #     'tags': forms.CheckboxSelectMultiple(),
         # }

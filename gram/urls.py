@@ -9,6 +9,7 @@ url(r'^profile/$',views.prof,name='prof'),
 url(r'^new_img$',views.new_img,name='new_img'),
 url(r'^edit_prof/',views.edit_prof,name='edit_prof'),
 url(r'^admin/$',views.admin,name='admin'),
+url(r'^$',views.follow,name='follow')
 ]
 
 if settings.DEBUG:

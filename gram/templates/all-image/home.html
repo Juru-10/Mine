@@ -7,15 +7,22 @@
   <h4>Suggestions For You</h4>
   <div class="row">
     <div class="users">
-      {% for user in users %}
-        <div id="img" style='float:left;margin:3%;'>
-          <img src="{{ user.prof_pic.url }}" alt="">
-          <h5>user.username</h5>
-          <h5>user.full_name</h5>
-          {% if follow %}
-            <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
-            <p>by <strong>{{image.editor.first_name}}</strong></p>
-          {% endif %}
+      {% for profile in profiles %}
+        <hr>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-2">
+            <img style='height:150px;width:150px;margin:3%;border-radius:100%;' src="{{ profile.prof_pic.url }}" alt="">
+          </div>
+          <div class="col-md-2">
+            <h4 class="text-center" style="margin-top:60px;">{{profile.user.username}}</h4>
+          </div>
+          <div class="col-md-2">
+            <a href="{%url 'follow'%}">
+              <input style="margin-top:50px;" type="submit" class="btn btn-primary btn-bg" value="Follow">
+            </a>
+          </div>
+          <div class="col-md-3"></div>
         </div>
       {% endfor %}
     </div>

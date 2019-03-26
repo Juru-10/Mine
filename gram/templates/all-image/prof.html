@@ -4,24 +4,23 @@
 
  <div class="container">
 
-   <div class="row">
-     <div class="" style=''>
-       <img src="{{profile.prof_pic.url}}" style='float:left;height:80%;width:30%;margin-right:60px;' alt="Profile Pic">
+  <div class="row">
+     <div class="col-md-4">
+       <img style='height:200px;width:200px;margin:3%;border-radius:100%;' src="{{ profile.prof_pic.url }}" alt="">
      </div>
-     {{profile.profile.prof_pic}}
-     <div class="" style='margin-top:100px;'>
-       <div class="">
-         <p>Posts : {{profile.image}}</p>
-         <p>followers : {{profile.followers}}</p>
-         <p>following : {{profile.following}}</p>
-       </div>
-       <div class="row">
-         {% autoescape on %}
-         {{profile.bio| safe}}
-        {% endautoescape %}
+     <div class="col-md-2">
+       <h4 class="text-center" style="margin-top:60px;">{{Profile.user.username}}</h4>
+       <p>{{profile.bio}}</p>
+     </div>
+     <div class="col-md-1">
+       <a href="{% url 'edit_prof' %}">
+         <input type="submit" class="btn btn-primary btn-sm" value="Edit Profile">
+       </a>
+     </div>
+     <div class="col-md-3"></div>
+  </div>
 
-       </div>
-     </div>
+  <div class="row">
      {% for image in image %}
      <img src="{{user.prof_pic.url}}" style='float:left;height:80%;width:50%;margin-right:60px;' alt="Profile Pic">
      <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
@@ -30,10 +29,8 @@
      <p>{{image.likes}}</p>
      {%endfor%}
    </div>
-   <a href="{% url 'edit_prof' %}">
-     <input type="submit" class="btn btn-primary btn-sm" value="Edit Profile">
-   </a>
-   <div class=""style='margin-top:100px;'>
+
+   <div class="row"style='margin-top:100px;'>
      <a href="{%url 'new_img'%}">
       <input type="submit" class="btn btn-primary btn-sm" value="Add Image">
      </a>

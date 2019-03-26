@@ -3,14 +3,18 @@ import datetime as dt
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
+class Follow(models.Model):
+    following = models.ForeignKey(User,related_name='following')
+    followers = models.ForeignKey(User,related_name='followers')
+
 class Profile(models.Model):
     user = models.OneToOneField(User)
     prof_pic =  models.ImageField(upload_to = 'gram/')
     bio = models.CharField(max_length=100)
-    following = models.BooleanField(default=False)
-    followers = models.BooleanField(default=False)
+    follow = models.ManyToManyField(Follow)
+
     def __str__(self):
-        return self.bio
+        return self.user.username
 
     @classmethod
     def save_profile(cls):
@@ -52,9 +56,3 @@ class Image(models.Model):
     def update_caption(cls,id):
         caption = cls.objects.filter(id).update()
         return caption
-
-class Follow(models.Model):
-    following = models.ForeignKey(User)
-    followers = models.ForeignKey(Profile)
-    def __str__(self):
-        return self.following

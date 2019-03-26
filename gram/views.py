@@ -7,15 +7,15 @@ from .forms import NewProfForm, NewImageForm
 
 @login_required(login_url='/accounts/login')
 def all_images(request):
-    image = Image.objects.all()
+    profiles = Profile.objects.all()
     date = dt.date.today()
-    return render(request,"all-image/home.html", {"date": date,"image":image})
+    return render(request,"all-image/home.html", {"date": date,"profiles":profiles})
 
 @login_required(login_url='/accounts/login')
 def prof(request):
     current_user = request.user
-    profile = Profile.objects.filter()
-    # print(profile)
+    Profile.id = current_user.id
+    profile = Profile.objects.filter(id__icontains=id)
     return render(request,"all-image/prof.html", {"profile":profile,"id":id})
 
 @login_required(login_url='/accounts/login')
@@ -46,7 +46,7 @@ def edit_prof(request):
             profile.user = current_user
             print(profile.prof_pic)
             # profile.edit_profile(id)
-            profile.save_profile()
+            profile.save()
         return redirect('prof')
     else:
         form = NewProfForm()
@@ -54,4 +54,10 @@ def edit_prof(request):
 
 @login_required(login_url='/accounts/login/')
 def admin(request):
+    return render(request)
+
+@login_required(login_url='/accounts/login/')
+def follow(request):
+    current_user=request.user
+    follow=Follow.objects.filter(current_user.id)
     return render(request)
