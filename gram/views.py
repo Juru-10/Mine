@@ -62,6 +62,7 @@ def admin(request):
 
 @login_required(login_url='/accounts/login/')
 def follow(request):
-    current_user=request.user
-    follow=Follow.objects.filter(current_user.id)
+    Follow.following+=1
+    following=Follow.following
+    Profile.follow=following
     return render(request)
