@@ -17,7 +17,7 @@ OR
 * Go to https://github.com
 * Search for Juru-10
 * Go to Juru-10 repositories
-* Get the repository called *gallery*
+* Get the repository called *instagram*
 OR
 * Go to https://github.com/Juru-10/instagram.git
 OR
@@ -28,10 +28,10 @@ OR
 
 * $ heroku login
 * Clone the repository
-* Use Git to clone gallery1010's source code to your local machine.
+* Use Git to clone instagram1010's source code to your local machine.
 
-* $ heroku git:clone -a gallery1010
-* $ cd gallery1010
+* $ heroku git:clone -a instagram1010
+* $ cd instagram1010
 
 ## link to it on Heroku
 

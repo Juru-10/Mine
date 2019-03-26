@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
 class Profile(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    prof_pic = models.ImageField(upload_to = 'gram/',default='SOME STRING')
-    bio = HTMLField()
+    user = models.OneToOneField(User)
+    prof_pic =  models.ImageField(upload_to = 'gram/')
+    bio = models.CharField(max_length=100)
     following = models.BooleanField(default=False)
     followers = models.BooleanField(default=False)
     def __str__(self):
-        return self.profile
+        return self.bio
 
     @classmethod
     def save_profile(cls):
@@ -24,7 +24,7 @@ class Profile(models.Model):
 
     @classmethod
     def edit_profile(cls,id):
-        profile = cls.objects.filter(id).update()
+        profile = cls.objects.filter(id).update(id)
         return profile
 
 class Image(models.Model):
@@ -32,8 +32,8 @@ class Image(models.Model):
     name = models.CharField(max_length=30)
     caption = HTMLField()
     profile = models.ForeignKey(Profile)
-    likes = models.IntegerField()
-    comments = models.CharField(max_length=100)
+    likes = models.BooleanField(default=False)
+    comments = models.CharField(max_length=100,null=True)
     pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     def __str__(self):
         return self.image

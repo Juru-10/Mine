@@ -13,9 +13,9 @@ def all_images(request):
 
 @login_required(login_url='/accounts/login')
 def prof(request):
-    user = request.user
-    profile = Profile.objects.filter(id=user.id)
-    print(profile)
+    current_user = request.user
+    profile = Profile.objects.filter()
+    # print(profile)
     return render(request,"all-image/prof.html", {"profile":profile,"id":id})
 
 @login_required(login_url='/accounts/login')
@@ -25,7 +25,8 @@ def new_img(request):
         form = NewImageForm(request.POST,request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            image.profile = current_user
+            # image.profile = current_user
+            print(image.image)
             image.save()
         return redirect('prof')
     else:
@@ -37,14 +38,19 @@ def edit_prof(request):
     current_user = request.user
     if request.method == 'POST':
         form = NewProfForm(request.POST,request.FILES)
+        print(form.errors.as_text())
+
         if form.is_valid():
-            profile = form.save()
+            # print(form.is_valid())
+            profile = form.save(commit=False)
             profile.user = current_user
-            profile.edit_profile(id=profile.id)
+            print(profile.prof_pic)
+            # profile.edit_profile(id)
+            profile.save_profile()
         return redirect('prof')
     else:
         form = NewProfForm()
-    return render(request,'registration/edit_prof.html',{"form": form})
+    return render(request,'registration/edit_prof.html',{"form": form,"id":id})
 
 @login_required(login_url='/accounts/login/')
 def admin(request):

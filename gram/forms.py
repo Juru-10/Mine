@@ -28,15 +28,18 @@ from .models import Profile,Image
 class NewProfForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user']
+        exclude = ['user','following','followers']
         # widgets = {
         #     'tags': forms.CheckboxSelectMultiple(),
         # }
+    def __init__(self, *args, **kwargs):
+        super(NewProfForm, self).__init__(*args, **kwargs)
+        # self.fields['prof_pic'].required = False
 
 class NewImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        exclude = ['user', 'pub_date']
+        exclude = ['profile','likes','comments','pub_date']
         # widgets = {
         #     'tags': forms.CheckboxSelectMultiple(),
         # }
