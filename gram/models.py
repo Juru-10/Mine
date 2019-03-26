@@ -7,6 +7,14 @@ class Follow(models.Model):
     following = models.ForeignKey(User,related_name='following')
     followers = models.ForeignKey(User,related_name='followers')
 
+    def save_follow(self):
+        self.save()
+
+    @classmethod
+    def save_f(cls):
+        follow = cls.objects.create().save()
+        return follow
+
 class Profile(models.Model):
     user = models.OneToOneField(User)
     prof_pic =  models.ImageField(upload_to = 'gram/')
@@ -39,8 +47,9 @@ class Image(models.Model):
     likes = models.BooleanField(default=False)
     comments = models.CharField(max_length=100,null=True)
     pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    
     def __str__(self):
-        return self.image
+        return self.name
 
     @classmethod
     def save_image(cls):

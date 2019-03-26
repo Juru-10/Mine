@@ -9,23 +9,27 @@ from .forms import NewProfForm, NewImageForm
 def all_images(request):
     profiles = Profile.objects.all()
     date = dt.date.today()
-    return render(request,"all-image/home.html", {"date": date,"profiles":profiles})
+    return render(request,"all-image/home.html", {"date": date,"profiles":profiles,"id":id})
 
 @login_required(login_url='/accounts/login')
 def prof(request):
-    current_user = request.user
-    Profile.id = current_user.id
-    profile = Profile.objects.filter(id__icontains=id)
-    return render(request,"all-image/prof.html", {"profile":profile,"id":id})
+    Profile.user = request.user
+    user_id = Profile.user.id
+    profile = Profile.objects.filter(id__icontains=user_id)
+    images = Image.objects.all()
+    print(images)
+    return render(request,"all-image/prof.html", {"profile":profile,"images":images,"id":id})
 
 @login_required(login_url='/accounts/login')
 def new_img(request):
     current_user = request.user
+    # user_id = Profile.user.id
+    # current_profile = Profile.objects.filter(id__icontains=user_id)
     if request.method == 'POST':
         form = NewImageForm(request.POST,request.FILES)
         if form.is_valid():
             image = form.save(commit=False)
-            # image.profile = current_user
+            image.profile = current_user.profile
             print(image.image)
             image.save()
         return redirect('prof')

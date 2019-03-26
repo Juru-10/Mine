@@ -20,20 +20,21 @@
      <div class="col-md-3"></div>
   </div>
 
-  <div class="row">
-     {% for image in image %}
-     <img src="{{user.prof_pic.url}}" style='float:left;height:80%;width:50%;margin-right:60px;' alt="Profile Pic">
-     <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
-     <p>by <strong>{{image.user.username}}</strong></p>
-     <p>{{image.comments}}</p>
-     <p>{{image.likes}}</p>
-     {%endfor%}
-   </div>
+  <div class="row"style='margin-top:100px;'>
+    <a href="{%url 'new_img'%}">
+     <input type="submit" class="btn btn-primary btn-sm" value="Add Image">
+    </a>
+  </div>
 
-   <div class="row"style='margin-top:100px;'>
-     <a href="{%url 'new_img'%}">
-      <input type="submit" class="btn btn-primary btn-sm" value="Add Image">
-     </a>
+  <div class="row">
+    {% for image in images %}
+      <div class="" style='float:left;height:200;width:300;margin-right:60px;'>
+        <h3> {{ image.name }} </h3>
+        <img src="{{image.image.url}}" alt="Profile Pic">
+        <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
+        <p>by <strong>{{image.profile.user.username}}</strong></p>
+      </div>
+    {%endfor%}
    </div>
  </div>
  <!-- </div> -->
