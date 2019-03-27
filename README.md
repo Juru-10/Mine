@@ -35,7 +35,7 @@ OR
 
 ## link to it on Heroku
 
-https://insta10.herokuapp.com/
+https://insta1010.herokuapp.com/
 
 ## Known Bugs
 
