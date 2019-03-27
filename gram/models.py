@@ -7,6 +7,9 @@ class Follow(models.Model):
     following = models.ForeignKey(User,related_name='following')
     followers = models.ForeignKey(User,related_name='followers')
 
+    def __str__(self):
+        return self.following
+
     def save_follow(self):
         self.save()
 
@@ -47,7 +50,7 @@ class Image(models.Model):
     likes = models.BooleanField(default=False)
     comments = models.CharField(max_length=100,null=True)
     pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    
+
     def __str__(self):
         return self.name
 

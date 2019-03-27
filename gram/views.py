@@ -8,17 +8,18 @@ from .forms import NewProfForm, NewImageForm
 @login_required(login_url='/accounts/login')
 def all_images(request):
     profiles = Profile.objects.all()
+    image = Image.objects.all()
     date = dt.date.today()
-    return render(request,"all-image/home.html", {"date": date,"profiles":profiles,"id":id})
+    return render(request,"all-image/home.html", {"date": date,"profiles":profiles,"image":image})
 
 @login_required(login_url='/accounts/login')
 def prof(request):
     Profile.user = request.user
     user_id = Profile.user.id
-    profile = Profile.objects.filter(id__icontains=user_id)
+    profile = Image.profile
     images = Image.objects.all()
     print(images)
-    return render(request,"all-image/prof.html", {"profile":profile,"images":images,"id":id})
+    return render(request,"all-image/prof.html", {"images":images,"id":id})
 
 @login_required(login_url='/accounts/login')
 def new_img(request):
@@ -62,7 +63,13 @@ def admin(request):
 
 @login_required(login_url='/accounts/login/')
 def follow(request):
-    Follow.following+=1
+    # Follow.following+=1
     following=Follow.following
     Profile.follow=following
-    return render(request)
+    return render(request,"all-image/home.html")
+
+@login_required(login_url='/accounts/login/')
+def delete(request,id):
+    image = Image.objects.filter(id=id)
+    image.delete()
+    return redirect('prof')

@@ -28,12 +28,17 @@
 
   <div class="row">
     {% for image in images %}
+    {% if profile == Profile.user.id %}
       <div class="" style='float:left;height:200;width:300;margin:3%;'>
         <h3> {{ image.name }} </h3>
         <img src="{{image.image.url}}" alt="Profile Pic">
         <p>Posted <strong>{{image.pub_date|timesince}}</strong> ago</p>
         <p>by <strong>{{image.profile.user.username}}</strong></p>
+        <a href="{%url 'delete' image.id %}" class="btn btn-danger btn-sm">
+          <i class="glyphicon glyphicon-trash"></i>
+        </a>
       </div>
+    {%endif%}
     {%endfor%}
    </div>
  </div>
