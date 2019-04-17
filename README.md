@@ -80,10 +80,10 @@ If you meet any issue, have questions, ideas or concerns;please contact me on
 
 * **This project is licenced under the MIT license.**
 * **Copyright (c) 2019 Juru-10**
-* **WeCode program under Moringa Project**
+* **WeCode program under Moringa project**
 
 ### Acknowledgments
 
-* *Moringa School Project/WeCode Programming*
+* *Moringa School project/WeCode Programming*
 * *Technical Mentors*
 * *Fellow Students*

@@ -33,7 +33,7 @@ class Profile(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True)
-    prof_pic =  models.ImageField(upload_to = 'gram/')
+    prof_pic =  models.ImageField(upload_to = 'pics/')
     bio = models.CharField(max_length=100)
     follow = models.ManyToManyField(Follow)
 
@@ -58,29 +58,27 @@ class Profile(models.Model):
 class Post(models.Model):
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=30)
-    image = models.ImageField(upload_to = 'ards/',default='Project Image')
+    image = models.ImageField(upload_to = 'them/',default='post Image')
     description = models.CharField(max_length=300)
     pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
-    def save_project(self):
+    def save_post(self):
         self.save()
 
-    def delete_project(self):
+    def delete_post(self):
         self.delete()
 
     @classmethod
     def search_post(cls,name):
         post = cls.objects.filter(name__icontains=name)
-        # Q(title__icontains=title) |
-        # Q(profile__user__icontains=owner)
-        # )
+
         return post
 
 class Comment(models.Model):
-    post = models.ForeignKey(Project,on_delete=models.CASCADE,null=True)
+    post = models.ForeignKey(post,on_delete=models.CASCADE,null=True)
     comment = models.CharField(max_length=300)
 
     def save_comment(self):
