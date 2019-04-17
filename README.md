@@ -1,25 +1,25 @@
-# Instagram_like App
+# See Them Again App
 
-#### The App that helps the User to sign in,upload photos and follow other users to view their photos, ...  22th,March,2019
+#### The App that helps the User to sign up and in,post their lost loved ones details and other users to view their posts, ...  17th,April,2019
 
 #### By **Assumpta Uwanyirijuru**
 
 ## Description
-This Instagram_like App will help:
-*the Users* to sign in to the app, to Upload pictures to the application, to See their profile with all their pictures, to Follow other users and see their pictures on their timeline, to Like a picture and leave a comment on it.
+This App will help:
+*Users* to sign up and in to the app, to post pictures, names and description about their loved ones to the application, to See their profile with all their posts, to see other users posts on the main page, and leave a comment on them.
 
 ## Setup/Installation Requirements
 
 * Go to you machine terminal
 * Install Python3.6 and its third party *django* modules
-* Write 'git clone https://github.com/Juru-10/instagram.git'
+* Write 'git clone https://github.com/Juru-10/STA.git'
 OR
 * Go to https://github.com
 * Search for Juru-10
 * Go to Juru-10 repositories
-* Get the repository called *instagram*
+* Get the repository called *STA*
 OR
-* Go to https://github.com/Juru-10/instagram.git
+* Go to https://github.com/Juru-10/STA.git
 OR
 * Install the Heroku CLI
 * Download and install the Heroku CLI.
@@ -28,14 +28,14 @@ OR
 
 * $ heroku login
 * Clone the repository
-* Use Git to clone instagram1010's source code to your local machine.
+* Use Git to clone STA1010's source code to your local machine.
 
-* $ heroku git:clone -a instagram1010
-* $ cd instagram1010
+* $ heroku git:clone -a STA1010
+* $ cd STA1010
 
 ## link to it on Heroku
 
-https://insta1010.herokuapp.com/
+https://STA1010.herokuapp.com/
 
 ## Known Bugs
 
@@ -48,10 +48,10 @@ It is still in Development and that will be soon resolved.
 
 **Our program should handle:**
 1. to Sign in to the app to start using.
-2. to Upload a picture to the application.
-3. to See the own profile with own pictures.
-4. to Follow other users and see their pictures on the own timeline.
-5. to Like a picture and leave a comment to it.
+2. to Upload a picture and its details to the application.
+3. to See the own profile with own posts.
+4. to see other users posts on the main page.
+5. to leave a comment to them post.
 
 ### Input Example
 
@@ -66,10 +66,8 @@ It is still in Development and that will be soon resolved.
 ## Technologies Used
 
 This App is made with:
-* *postgresql*
-* *SQLAlchemy*
-* *python3.6*
-* *Django*
+* *postgresql & SQLAlchemy*
+* *python3.6 & Django framework*
 * *Bootstrap & css*
 * *html*
 
