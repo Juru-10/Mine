@@ -1,23 +1,35 @@
 from django.db import models
+
 import datetime as dt
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
-# from comment.models import CommentModel
+# from django.core.validators import MaxValueValidator,MinValueValidator
 
-class Follow(models.Model):
-    following = models.ForeignKey(User,related_name='following')
-    followers = models.ForeignKey(User,related_name='followers')
+from django.db.models.signals import post_save
+
+from django.db.models import Q
+
+class Profile(models.Model):
+    user = models.OneToOneField(User,null=True,related_name='profile')
+    prof_pic = models.ImageField(upload_to = 'ards/',default='Profile Pic')
+    bio = models.CharField(max_length=300)
+    contact = models.CharField(max_length=30)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return self.following
+        return self.user
 
-    def save_follow(self):
+    def save_profile(self):
         self.save()
 
-    @classmethod
-    def save_f(cls):
-        follow = cls.objects.create().save()
-        return follow
+    def create_profile(sender,instance,created,**kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    post_save.connect(create_profile,sender=User)
+        # user = request.user
+        # profile = Profile.objects.filter(user=user).first()
+        # return profile
 
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True)
@@ -43,44 +55,33 @@ class Profile(models.Model):
         profile = cls.objects.filter(id).update(id)
         return profile
 
-class Comment(models.Model):
-    comment = models.CharField(max_length=100,null=True)
-    
-
-# class Like(models.Model):
-#     like = models.BooleanField(default=False)
-
-class Image(models.Model):
-    image = models.ImageField(upload_to = 'gram/',default='SOME STRING')
+class Post(models.Model):
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=30)
-    caption = HTMLField()
-    profile = models.ForeignKey(Profile, null=True)
-    # likes = models.ForeignKey(Like, null=True)
-    comments = models.ForeignKey(Comment, null=True)
+    image = models.ImageField(upload_to = 'ards/',default='Project Image')
+    description = models.CharField(max_length=300)
     pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
-    @classmethod
-    def save_image(cls):
-        image = cls.objects.create()
-        image.save()
-        return image
+    def save_project(self):
+        self.save()
+
+    def delete_project(self):
+        self.delete()
 
     @classmethod
-    def delete_image(cls):
-        image = cls.objects.delete()
+    def search_post(cls,name):
+        post = cls.objects.filter(name__icontains=name)
+        # Q(title__icontains=title) |
+        # Q(profile__user__icontains=owner)
+        # )
+        return post
 
-    @classmethod
-    def update_caption(cls,id):
-        caption = cls.objects.filter(id).update()
-        return caption
+class Comment(models.Model):
+    post = models.ForeignKey(Project,on_delete=models.CASCADE,null=True)
+    comment = models.CharField(max_length=300)
 
-    @classmethod
-    def count_commments(cls):
-        return cls.comments.count()
-
-    @classmethod
-    def all_comments(cls):
-        return cls.comments.filter(user_id=user_id)
+    def save_comment(self):
+        self.save()

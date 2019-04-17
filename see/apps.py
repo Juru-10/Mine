@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class GramConfig(AppConfig):
-    name = 'gram'
+class SeeConfig(AppConfig):
+    name = 'see'
