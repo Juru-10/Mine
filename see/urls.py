@@ -3,16 +3,16 @@ from django.conf.urls.static import static
 from django.conf.urls import url
 from . import views
 
-urlpatterns=[
-url(r'^$',views.all_images,name='home'),
-url(r'^profile/$',views.prof,name='prof'),
-url(r'^new_img$',views.new_img,name='new_img'),
-url(r'^edit_prof/',views.edit_prof,name='edit_prof'),
-url(r'^admin/$',views.admin,name='admin'),
-url(r'^$',views.follow,name='follow'),
-url(r'^delete/<id>/(\d+)$',views.delete,name='delete'),
-# url(r'^update/<id>/(\d+)$',views.update,name='update'),
-url(r'^comment/',views.comment,name='comment')
+urlpatterns = [
+    url(r'^$',views.home,name='home'),
+    url(r'^prof$',views.prof,name='prof'),
+    url(r'^post$',views.post,name='post'),
+    url(r'^search$',views.search,name='search'),
+    url(r'^new_prof$',views.new_prof,name='new_prof'),
+    url(r'^new_post$',views.new_post,name='new_post'),
+    url(r'^delete/<id>/(\d+)$',views.delete,name='delete'),
+    url(r'^new_comment$',views.new_comment,name='new_comment'),
+    url(r'^admin/$',views.admin,name='admin'),
 ]
 
 if settings.DEBUG:

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .models import User,Profile,Image,Follow
+from .models import User,Profile,Post,Comment
 import datetime as dt
 
 class ProfileTest(TestCase):
@@ -43,9 +43,9 @@ class CommentTest(TestCase):
         self.post = Post(profile = self.juru, name = 'Test', image = 'Test Image', description = 'Test')
         self.post.save()
 
-        self.review = Review(post = self.post, comment = 'test')
+        self.comment = Comment(post = self.post, comment = 'test')
 
     def test_save(self):
-        self.review.save_review()
+        self.comment.save_comment()
         comments = Post.objects.all()
         self.assertTrue(len(comments) >0 )

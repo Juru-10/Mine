@@ -12,7 +12,7 @@
        <img style='height:200px;width:200px;margin:3%;border-radius:100%;' src="{{ user.profile.prof_pic.url }}" alt="">
      </div>
      <div class="col-md-2">
-       <h3>{{user}}</h3>
+       <h3>{{user}}'s Profile</h3>
        <p>{{user.profile.bio}}</p>
        <p>{{user.profile.contact}}</p>
      </div>
@@ -33,7 +33,7 @@
   <div class="row">
     {% for post in posts %}
       <div class="" style='float:left;height:200;width:300;margin:3%;'>
-        <h3> {{ post.title }} </h3>
+        <h3> {{ post.name }} </h3>
         <img src="{{post.image.url}}" alt="post Pic">
         <p>posted <strong>{{post.pub_date|timesince}}</strong> ago</p>
         <p>by <strong>{{post.profile.user}}</strong></p>
@@ -41,7 +41,7 @@
           <i class="glyphicon glyphicon-trash" style="width:80px;font-size:30px;"></i>
         </a>
         <a href="{%url 'new_comment' %}"class="btn btn-default btn-sm" id="like">
-          <i class="glyphicon glyphicon-pencil" style="width:80px;font-size:30px;">Comment</i>
+          <i class="glyphicon glyphicon-comment" style="width:150px;font-size:30px;">Comment</i>
         </a>
 
       </div>

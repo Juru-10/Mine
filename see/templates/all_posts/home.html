@@ -4,29 +4,35 @@
 {{block.super}}
 
 <body>
-  <div class="" style="margin:2%;">
-    <style media="screen">
-      @media only screen and (max-width: 600px) {
-        #img {
-          width:80vw;
-        }
-      }
-    </style>
+  <div class="" style="margin:2%;background-color:rgba(128, 139, 150,0.2);padding:30px;">
     <div class="row">
+      {%if posts%}
       {% for post in posts %}
-        <div class="" style='float:left;margin:1%;'>
-          <h3> {{ post.name }} </h3>
+        <div class="" style='float:left;'>
+          <h3> Name: {{ post.name }} </h3>
           <img id="img" src="{{post.image.url}}" alt="post Pic"style="width:412px;height:360px;">
           <p>posted <strong>{{post.pub_date|timesince}}</strong> ago</p>
           <p>by <strong>{{post.profile.user}}</strong></p>
-          <a href="{%url 'delete' post.id %}" class="btn btn-danger btn-sm">
+          <!-- <a href="{%url 'delete' post.id %}" class="btn btn-danger btn-sm">
             <i class="glyphicon glyphicon-trash" style="width:50px;font-size:20px;"></i>
+          </a> -->
+          <a href="{%url 'new_comment' %}"class="btn btn-primary btn-sm" id="like">
+            <i class="glyphicon glyphicon-comment" style="width:100px;font-size:20px;">Comment</i>
           </a>
-          <a href="{%url 'new_comment' %}"class="btn btn-default btn-sm" id="like">
-            <i class="glyphicon glyphicon-pencil" style="width:50px;font-size:20px;">Comment</i>
-          </a>
+          <div class="">
+            <h3>Comments</h3>
+            {% for comment in comments %}
+              <div class="">
+                <p>{{comment.id}}.<strong>{{comment.post.profile.user.username}} :</strong></p>
+                <p style="margin-left:20px;">"{{comment.comment}}"</p>
+              </div>
+            {%endfor%}
+          </div>
         </div>
       {%endfor%}
+      {%else%}
+        <p>No posts yet!</p>
+      {%endif%}
      </div>
   </div>
   <footer style="color: white;text-align: center;background-color:rgb(40,0,20);">

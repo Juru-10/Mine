@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Profile,Image,Follow
+from .models import Profile,Post,Comment
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user','prof_pic','bio')
 
 admin.site.register(Profile,ProfileAdmin)
-admin.site.register(Image)
-admin.site.register(Follow)
+admin.site.register(Post)
+admin.site.register(Comment)
